@@ -1,0 +1,36 @@
+services:
+  api:
+    build: .
+    image: mutil-agent-v1:latest
+    container_name: mutil-agent-api
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      DATABASE_URL: sqlite+aiosqlite:////app/data/tasks.db
+      MEMORY_PERSIST_DIR: /app/data/chroma
+      CHECKPOINT_DIR: /app/data/checkpoints
+    volumes:
+      - ./data:/app/data
+      - ./output:/app/output
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./frontend-vue
+      dockerfile: Dockerfile
+    image: mutil-agent-v1-web:latest
+    container_name: mutil-agent-web
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    restart: unless-stopped

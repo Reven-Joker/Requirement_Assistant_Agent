@@ -1,0 +1,164 @@
+/* ═══════════════════════════════════════════════════════
+   Agent — Delivery Workspace
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ─────────────────────────── */
+  --bg-primary:    #f7f8fa;
+  --bg-secondary:  #ffffff;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f8faff;
+  --bg-input:      #f5f6f8;
+  --bg-overlay:    #f2f4f7;
+
+  /* ── Borders ────────────────────────────── */
+  --border:        #e2e5ea;
+  --border-light:  #eef0f3;
+  --border-focus:  #246bfd;
+
+  /* ── Text ────────────────────────────────── */
+  --text-primary:   #171a21;
+  --text-secondary: #606775;
+  --text-muted:     #9299a8;
+  --text-placeholder: #b1b6c1;
+
+  /* ── Accent (Professional Blue) ─────────── */
+  --accent:         #246bfd;
+  --accent-subtle:  #edf3ff;
+  --accent-hover:   #4b84ff;
+  --accent-dark:    #165dff;
+  --accent-glow:    rgba(36, 107, 253, 0.22);
+
+  /* ── Status Colors ───────────────────────── */
+  --success:        #19a55a;
+  --success-subtle: #eaf8f0;
+  --warning:        #d98b08;
+  --warning-subtle: #fff7e6;
+  --danger:         #e5484d;
+  --danger-subtle:  #fff0f0;
+  --info:           #246bfd;
+  --info-subtle:    #edf3ff;
+
+  /* ── Spacing / Radius / Shadows ──────────── */
+  --radius-sm:      6px;
+  --radius-md:      12px;
+  --radius-lg:      16px;
+  --shadow-sm:      0 1px 2px rgba(19, 33, 68, 0.04);
+  --shadow-md:      0 8px 24px rgba(19, 33, 68, 0.07);
+  --shadow-lg:      0 18px 50px rgba(19, 33, 68, 0.1);
+
+  /* ── Typography ──────────────────────────── */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Transitions ─────────────────────────── */
+  --transition-fast: 0.12s ease;
+  --transition-base: 0.2s ease;
+}
+
+/* ── Global Reset ────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(980px 420px at -8% -12%, rgba(36, 107, 253, 0.14), transparent 58%),
+    radial-gradient(820px 380px at 108% -8%, rgba(109, 77, 255, 0.12), transparent 52%),
+    linear-gradient(180deg, #f4f7fc 0%, var(--bg-primary) 280px);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#app { width: 100%; min-height: 100vh; }
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Selection ──────────────────────────────── */
+::selection { background: var(--accent-subtle); color: var(--accent); }
+
+/* ── Card Base ───────────────────────────────── */
+.card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), #fbfcff 100%);
+  border: 1px solid rgba(214, 222, 236, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(28, 48, 92, 0.05);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+.card:hover {
+  border-color: #c9d5ee;
+  box-shadow: 0 16px 36px rgba(28, 48, 92, 0.08);
+}
+
+.agent-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 3px 8px 3px 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #edf3ff, #f4f0ff);
+  color: #3d57d6;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Code ────────────────────────────────────── */
+pre, code { font-family: var(--font-mono); font-size: 0.85rem; }
+pre {
+  background: #f6f8fb;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+code {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* ── Skeleton Loading ──────────────────────── */
+.skeleton {
+  background: var(--bg-card-hover);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Fade-in entrance ──────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in { animation: fade-in 0.28s ease; }
+
+button, input, textarea { font: inherit; }
+
+.el-button { transition: all var(--transition-fast); }
+.el-button:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent-subtle);
+  outline-offset: 1px;
+}
