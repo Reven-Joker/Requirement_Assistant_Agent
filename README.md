@@ -1,4 +1,4 @@
-# Agent Requirement Delivery System
+# Agent Requirement System
 
 Agent is a multi-agent system that turns a natural-language business requirement into a delivery package. It clarifies the requirement, designs a solution, produces a technical design, reviews the result, and exports the files. The web application is branded Agent. The API title is Multi-Agent Requirement Delivery System.
 
